@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using flying.nomad.Domain.Catalog;
 using flying.nomad.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace flying.nomad.Api.Controllers {
     [ApiController]
@@ -25,6 +26,7 @@ public class CatalogController : ControllerBase {
         return Ok(items);
     }
     */
+
     /*
     [HttpGet("{id:int}")]
     public IActionResult GetItem(int id) {
@@ -49,12 +51,14 @@ public class CatalogController : ControllerBase {
     return Created("catalog/42", item);
     }
     */
+
     [HttpPost]
     public IActionResult Post(Item item) {
         _db.Items.Add(item);
         _db.SaveChanges();
         return Created($"catalog/{item.Id}", item);
     }
+
     /* Test the post method using the following data in the body of the message:
     {
         "name": "Shoes",
@@ -74,6 +78,7 @@ public class CatalogController : ControllerBase {
     return Ok(item);
     }
     */
+
     [HttpPost("{id:int}/ratings")]
     public IActionResult PostRating(int id, Rating rating) {
         var item = _db.Items.Find(id);
@@ -85,14 +90,29 @@ public class CatalogController : ControllerBase {
         return Ok(item);
     }
 
+    /*
     [HttpPut("{id:int}")]
     public IActionResult Put(int id, Item item) {
     // return Ok(item);
     return NoContent();
-}
+    }
+    */
 
-/*
-Test put using the following data in the body of the message:
+    [HttpPut("{id:int}")]
+    public IActionResult Put(int id, Item item) {
+        if (id == item.Id) {
+            return BadRequest();
+        }
+        if (_db.Items.Find(id) == null) {
+            return NotFound();
+        }
+        _db.Entry(item).State = EntityState.Modified;
+        _db.SaveChanges();
+        return NoContent();
+    }
+
+    /*
+    Test put using the following data in the body of the message:
 
 {
     "id": 1,
