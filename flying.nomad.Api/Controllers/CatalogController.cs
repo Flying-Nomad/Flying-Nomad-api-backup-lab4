@@ -100,7 +100,7 @@ public class CatalogController : ControllerBase {
 
     [HttpPut("{id:int}")]
     public IActionResult Put(int id, Item item) {
-        if (id == item.Id) {
+        if (id != item.Id) {
             return BadRequest();
         }
         if (_db.Items.Find(id) == null) {
