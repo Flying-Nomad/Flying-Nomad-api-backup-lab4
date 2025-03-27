@@ -49,14 +49,22 @@ public class CatalogController : ControllerBase {
     return Created("catalog/42", item);
     }
     */
-
     [HttpPost]
     public IActionResult Post(Item item) {
         _db.Items.Add(item);
         _db.SaveChanges();
         return Created($"catalog/{item.Id}", item);
     }
-
+    /* Test the post method using the following data in the body of the message:
+    {
+        "name": "Shoes",
+        "description": "Running Shoes.",
+        "brand": "Nike",
+        "price": "109.99!"
+    }
+    */
+    
+    /*
     [HttpPost("{id:int}/ratings")]
     public IActionResult PostRating(int id, [FromBody] Rating rating) {
     var item = new Item("Shirt", "Ohio State shirt.", "Nike", 29.99m);
@@ -65,16 +73,17 @@ public class CatalogController : ControllerBase {
 
     return Ok(item);
     }
-
-    /* Test the post method using the following data in the body of the message:
-
-    {
-        "stars": 5,
-        "userName": "John Smith",
-        "review": "Great!"
+    */
+    [HttpPost("{id:int}/ratings")]
+    public IActionResult PostRating(int id, Rating rating) {
+        var item = _db.Items.Find(id);
+        if (item == null) {
+            return NotFound();
+        }
+        item.AddRating(rating);
+        _db.SaveChanges();
+        return Ok(item);
     }
-
-*/
 
     [HttpPut("{id:int}")]
     public IActionResult Put(int id, Item item) {
