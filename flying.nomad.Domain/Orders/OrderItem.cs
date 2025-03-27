@@ -1,4 +1,4 @@
-using flying.nomad.domain.Catalog;
+using flying.nomad.Domain.Catalog;
 
 namespace flying.nomad.Domain.Orders
 {
