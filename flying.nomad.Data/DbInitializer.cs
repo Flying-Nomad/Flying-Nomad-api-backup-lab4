@@ -1,7 +1,7 @@
 using flying.nomad.Domain.Catalog;
 using Microsoft.EntityFrameworkCore;
 
-namespace flying.nomad.Data
+namespace flying.nomad.Data.Initializers
 {
     public static class DbInitializer
     {
