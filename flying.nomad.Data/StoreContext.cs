@@ -1,6 +1,5 @@
 ﻿using flying.nomad.Domain.Catalog;
 using Microsoft.EntityFrameworkCore;
-using flying.nomad.Data.Initalizers; // Ensure this namespace contains DbInitializer
 
 namespace flying.nomad.Data {
     public class StoreContext : DbContext {
