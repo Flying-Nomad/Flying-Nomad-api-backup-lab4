@@ -2,6 +2,8 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace flying.nomad.Data.Migrations
 {
     /// <inheritdoc />
@@ -45,6 +47,15 @@ namespace flying.nomad.Data.Migrations
                         column: x => x.ItemId,
                         principalTable: "Items",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Items",
+                columns: new[] { "Id", "Brand", "Description", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1, "Nike", "Ohio State shirt", "Shirt", 29.99m },
+                    { 2, "Nike", "Ohio State shorts", "Shorts", 44.99m }
                 });
 
             migrationBuilder.CreateIndex(

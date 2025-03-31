@@ -10,7 +10,7 @@ using flying.nomad.Data;
 namespace flying.nomad.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20250327004442_init")]
+    [Migration("20250331183710_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -40,6 +40,24 @@ namespace flying.nomad.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Items");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Brand = "Nike",
+                            Description = "Ohio State shirt",
+                            Name = "Shirt",
+                            Price = 29.99m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Brand = "Nike",
+                            Description = "Ohio State shorts",
+                            Name = "Shorts",
+                            Price = 44.99m
+                        });
                 });
 
             modelBuilder.Entity("flying.nomad.Domain.Catalog.Rating", b =>

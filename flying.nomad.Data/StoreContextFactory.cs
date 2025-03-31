@@ -8,6 +8,7 @@ namespace flying.nomad.Data
         public StoreContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<StoreContext>();
+
             optionsBuilder.UseSqlite("Data Source=../Registrar.sqlite");
 
             return new StoreContext(optionsBuilder.Options);
